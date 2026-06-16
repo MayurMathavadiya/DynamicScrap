@@ -196,7 +196,7 @@ python3 example_amazon_scrap_async.py
 
 ## Model Providers
 
-The agents use the OpenAI SDK interface, so any OpenAI-compatible provider can work if it supports chat completions.
+The agents use the OpenAI SDK interface, so any OpenAI-compatible provider can work if it supports chat completions. For general details on how to configure the client with a custom `base_url` or alternative environment variables, refer to the [OpenAI Python Official Documentation](https://developers.openai.com/api/docs/libraries?language=python) or [OpenAI Python SDK Usage - Github Documentation](https://github.com/openai/openai-python#usage).
 
 ### Examples:
 
@@ -237,6 +237,8 @@ client = OpenAI(
 
 ### 2. Together
 
+Refer to the [Together AI OpenAI Compatibility Guide](https://docs.together.ai/docs/openai-api-compatibility) for more details.
+
 ```bash
 BASE_URL="https://api.together.xyz/v1"
 API_KEY="your-together-api-key"
@@ -246,6 +248,8 @@ MODEL="meta-llama/Llama-3-70b-chat-hf"
 ---
 
 ### 3. OpenRouter
+
+Refer to the [OpenRouter OpenAI Integration Guide](https://openrouter.ai/docs/guides/community/openai-sdk) for more details.
 
 ```bash
 BASE_URL="https://openrouter.ai/api/v1"
@@ -257,8 +261,16 @@ MODEL="anthropic/claude-3.5-sonnet"
 
 ### 4. Ollama (Locally)
 
+Refer to the [Ollama OpenAI Compatibility Guide](https://docs.ollama.com/api/openai-compatibility) for more details.
+
 ```bash
 BASE_URL="http://localhost:11434/v1"
 API_KEY="ollama"
 MODEL="qwen2.5:7b"
 ```
+
+---
+
+## Acknowledgments
+
+Special thanks to the [OpenAI SDK](https://github.com/openai/openai-python) team for their excellent library, which powers our LLM communication interface.
