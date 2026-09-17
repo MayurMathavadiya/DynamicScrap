@@ -1,129 +1,361 @@
-# Dynamic Scrap Agent
+# 🤖 DynamicScrap
 
-`DynamicScrap` is an autonomous, LLM-driven web scraping agent built with Python, Playwright, BeautifulSoup, Pydantic, and the OpenAI SDK. It translates natural language instructions into browser actions, then extracts data into a user-defined schema without requiring hardcoded CSS or XPath selectors.
+### Autonomous LLM-Powered Web Scraping Agent
 
-The repo currently provides two implementations:
+**DynamicScrap** is an autonomous, LLM-driven web scraping agent built with **Python, Playwright, BeautifulSoup, Pydantic, and the OpenAI SDK**.
 
-- `DynamicScrap.py` — synchronous agent using `OpenAI` and `playwright.sync_api`.
-- `DynamicScrapAsync.py` — asynchronous agent using `AsyncOpenAI` and `playwright.async_api`.
+It converts **natural-language instructions into browser actions**, navigates websites dynamically, and extracts data into a user-defined schema — without requiring hardcoded CSS or XPath selectors.
 
----
+<p align="center">
+  <img src="./DynamicScrap.png" alt="DynamicScrap Architecture" width="100%"/>
+</p>
 
-## Key Features
-
-- **Autonomous Navigation**: Plans and runs Playwright actions such as click, type, hover, scroll, wait, pagination, and tab handling.
-- **Search Handling**: Detects visible search inputs, types the query, and submits it.
-- **Dynamic Extraction**: Generates extraction specs with LLM help and falls back to BeautifulSoup parsing.
-- **Schema Mapping**: Maps extracted rows to your requested output schema.
-- **Validation & Repair**: Checks required fields and proposes repair actions when page data is missing.
-- **Sync + Async Support**: Use blocking scripts or async applications without changing task definitions.
+<p align="center">
+  <b>Natural Language → LLM Agent → Browser Automation → Dynamic Extraction → Structured Data</b>
+</p>
 
 ---
 
-## Tech Stack
+## 🚀 Why DynamicScrap?
 
-- **Python**
-- **Playwright** for browser automation
-- **BeautifulSoup4** for HTML parsing
-- **Pydantic** for task/schema validation
-- **OpenAI SDK** for OpenAI-compatible model providers
+Traditional web scrapers usually depend heavily on fixed CSS selectors or XPath expressions.
+
+When a website changes its structure, those selectors can stop working.
+
+DynamicScrap takes a different approach:
+
+```text
+┌─────────────────────────┐
+│   Natural Language Task │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│       LLM Agent         │
+│   Planning & Decisions  │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│       Playwright        │
+│   Browser Automation    │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│      Web Page / Site    │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│ Dynamic Data Extraction │
+│ BeautifulSoup + LLM    │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│    Validation & Repair  │
+└────────────┬────────────┘
+             ↓
+┌─────────────────────────┐
+│     Structured JSON     │
+└─────────────────────────┘
+```
+
+The goal is simple:
+
+> **Tell the agent what data you need, instead of telling it exactly where the data is.**
 
 ---
 
-## Installation
+## ✨ Key Features
+
+* 🧠 **LLM-Powered Navigation**
+  Dynamically plans browser actions based on natural-language instructions.
+
+* 🌐 **Browser Automation**
+  Uses Playwright for real browser interaction.
+
+* 🔎 **Search Handling**
+  Detects visible search inputs, enters queries, and submits them.
+
+* 🖱️ **Dynamic Actions**
+  Supports actions such as click, type, hover, scroll, wait, pagination, and tab handling.
+
+* 📦 **Dynamic Extraction**
+  Uses LLM-assisted extraction with BeautifulSoup as a parsing layer.
+
+* 🧩 **Schema Mapping**
+  Maps extracted data into the structure defined by the user.
+
+* ✅ **Validation**
+  Checks whether required fields were successfully extracted.
+
+* 🔧 **Automatic Repair**
+  Attempts corrective actions when required data is missing.
+
+* ⚡ **Sync + Async Support**
+  Provides both synchronous and asynchronous implementations.
+
+* 🤖 **OpenAI-Compatible Providers**
+  Supports providers that expose an OpenAI-compatible API interface.
+
+* 🏠 **Local LLM Support**
+  Can be configured with local models through Ollama.
+
+---
+
+## 🏗️ Architecture
+
+```text
+                    USER TASK
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   LLM PLANNER   │
+              │  Understands    │
+              │     intent      │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │    PLAYWRIGHT   │
+              │     BROWSER     │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   WEB PAGE      │
+              │  Navigation     │
+              │  Search         │
+              │  Click / Hover  │
+              │  Pagination     │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │    EXTRACTION   │
+              │ BeautifulSoup + │
+              │      LLM        │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │   VALIDATION    │
+              │       +         │
+              │     REPAIR      │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ STRUCTURED DATA │
+              │      JSON       │
+              └─────────────────┘
+```
+
+---
+
+## 🧰 Tech Stack
+
+| Technology                | Purpose                    |
+| ------------------------- | -------------------------- |
+| 🐍 Python                 | Core implementation        |
+| 🎭 Playwright             | Browser automation         |
+| 🍲 BeautifulSoup4         | HTML parsing               |
+| 🧱 Pydantic               | Task and schema validation |
+| 🤖 OpenAI SDK             | LLM communication          |
+| 🧠 OpenAI-Compatible APIs | LLM provider flexibility   |
+| 🏠 Ollama                 | Local LLM support          |
+
+---
+
+## 📁 Project Structure
+
+```text
+DynamicScrap/
+│
+├── DynamicScrap.py
+├── DynamicScrapAsync.py
+│
+├── example_github_scrap.py
+├── example_github_scrap_async.py
+│
+├── example_amazon_scrap.py
+├── example_amazon_scrap_async.py
+│
+├── requirements.txt
+├── DynamicScrap.png
+└── README.md
+```
+
+### Implementations
+
+**`DynamicScrap.py`**
+
+Synchronous implementation using:
+
+```python
+OpenAI
+playwright.sync_api
+```
+
+**`DynamicScrapAsync.py`**
+
+Asynchronous implementation using:
+
+```python
+AsyncOpenAI
+playwright.async_api
+```
+
+---
+
+# ⚡ Quick Start
+
+## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/DynamicScrap.git
+git clone https://github.com/MayurMathavadiya/DynamicScrap.git
 cd DynamicScrap
+```
+
+## 2. Create Virtual Environment
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
+## 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+## 4. Install Chromium
+
+```bash
 playwright install chromium
 ```
 
-Configure these environment variables before running examples:
+---
 
-```bash
+# 🔐 Configuration
+
+Create a `.env` file in the project directory.
+
+For OpenAI-compatible providers:
+
+```env
 BASE_URL="https://api.groq.com/openai/v1"
 API_KEY="your-api-key"
 MODEL="your-model-name"
 ```
 
-You can place them in a local `.env` file because the examples call `load_dotenv()`.
+The examples use `load_dotenv()`, so the variables can be stored locally in `.env`.
+
+> ⚠️ Never commit your `.env` file or API keys to GitHub.
 
 ---
 
-## Quick Start: Sync
-
-Use `DynamicScrap.py` for normal blocking scripts.
+# 💻 Basic Example
 
 ```python
 import os
 import json
+
 from dotenv import load_dotenv
 from openai import OpenAI
-from DynamicScrap import DynamicScrapeAgent, TaskSchema, ScrapeTask
+
+from DynamicScrap import (
+    DynamicScrapeAgent,
+    TaskSchema,
+    ScrapeTask,
+)
 
 load_dotenv()
 
-def main() -> None:
-    task_obj = ScrapeTask(
-        url="https://news.ycombinator.com/",
-        extract_instruction="Extract the top 5 stories with title and link.",
-        output_schema=TaskSchema(
-            items=[{"title": "string", "link": "string"}],
-        ),
-        required_fields=["title", "link"],
-        max_pages=1,
-        total_timeout_sec=120,
+task = ScrapeTask(
+    url="https://news.ycombinator.com/",
+    extract_instruction="Extract the top 5 stories with title and link.",
+    output_schema=TaskSchema(
+        items=[
+            {
+                "title": "string",
+                "link": "string",
+            }
+        ],
+    ),
+    required_fields=["title", "link"],
+    max_pages=1,
+    total_timeout_sec=120,
+)
+
+client = OpenAI(
+    base_url=os.environ.get("BASE_URL"),
+    api_key=os.environ.get("API_KEY"),
+)
+
+agent = DynamicScrapeAgent(
+    model=os.environ.get("MODEL"),
+    client=client,
+    task=task.model_dump(),
+    headless=True,
+)
+
+try:
+    result = agent.run_task()
+
+    print(
+        json.dumps(
+            result["data"],
+            indent=2,
+            ensure_ascii=False,
+        )
     )
 
-    client = OpenAI(
-        base_url=os.environ.get("BASE_URL"), # Remove if openAI
-        api_key=os.environ.get("API_KEY"),
-    )
+    if not result["ok"]:
+        print(
+            json.dumps(
+                result["diagnostics"],
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
 
-    agent = DynamicScrapeAgent(
-        model=os.environ.get("MODEL"),
-        client=client,
-        task=task_obj.model_dump(),
-        headless=True,
-    )
-
-    try:
-        result = agent.run_task()
-        print(json.dumps(result["data"], indent=2, ensure_ascii=False))
-        if not result["ok"]:
-            print(json.dumps(result["diagnostics"], indent=2, ensure_ascii=False))
-    finally:
-        agent.close()
-
-if __name__ == "__main__":
-    main()
+finally:
+    agent.close()
 ```
 
 ---
 
-## Quick Start: Async
+# ⚡ Async Example
 
-Use `DynamicScrapAsync.py` when your application already uses `asyncio`.
+For applications using `asyncio`, use `DynamicScrapAsync.py`.
 
 ```python
 import os
 import json
 import asyncio
+
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
-from DynamicScrapAsync import DynamicScrapeAgent, TaskSchema, ScrapeTask
+
+from DynamicScrapAsync import (
+    DynamicScrapeAgent,
+    TaskSchema,
+    ScrapeTask,
+)
 
 load_dotenv()
 
-async def main() -> None:
-    task_obj = ScrapeTask(
+async def main():
+
+    task = ScrapeTask(
         url="https://news.ycombinator.com/",
         extract_instruction="Extract the top 5 stories with title and link.",
         output_schema=TaskSchema(
-            items=[{"title": "string", "link": "string"}],
+            items=[
+                {
+                    "title": "string",
+                    "link": "string",
+                }
+            ],
         ),
         required_fields=["title", "link"],
         max_pages=1,
@@ -131,24 +363,31 @@ async def main() -> None:
     )
 
     client = AsyncOpenAI(
-        base_url=os.environ.get("BASE_URL"), # Remove if openAI
+        base_url=os.environ.get("BASE_URL"),
         api_key=os.environ.get("API_KEY"),
     )
 
     agent = DynamicScrapeAgent(
         model=os.environ.get("MODEL"),
         client=client,
-        task=task_obj.model_dump(),
+        task=task.model_dump(),
         headless=True,
     )
 
     try:
         result = await agent.run_task()
-        print(json.dumps(result["data"], indent=2, ensure_ascii=False))
-        if not result["ok"]:
-            print(json.dumps(result["diagnostics"], indent=2, ensure_ascii=False))
+
+        print(
+            json.dumps(
+                result["data"],
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
+
     finally:
         await agent.close()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -156,134 +395,229 @@ if __name__ == "__main__":
 
 ---
 
-## Task Configuration
+# 🔍 Task Configuration
 
-| Parameter | Type | Required | Default | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| `url` | `str` | Yes | - | Initial page URL. |
-| `extract_instruction` | `str` | Yes | - | Natural language extraction instruction. |
-| `output_schema` | `TaskSchema` | Yes | - | Expected output fields and types. |
-| `search_query` | `str` | No | `None` | Query to submit through the page search box. |
-| `action_instruction` | `str` | No | `None` | Browser action instruction before extraction. |
-| `required_fields` | `List[str]` | No | `None` | Fields required for validation success. |
-| `max_pages` | `int` | No | `1` | Number of pages to collect through pagination. |
-| `max_repairs` | `int` | No | `2` | Repair retries when source data is missing. |
-| `total_timeout_sec` | `int` | No | `300` | Overall task timeout in seconds. |
+| Parameter             | Type         | Required | Default | Description                                 |
+| --------------------- | ------------ | -------: | ------: | ------------------------------------------- |
+| `url`                 | `str`        |        ✅ |       — | Initial page URL                            |
+| `extract_instruction` | `str`        |        ✅ |       — | Natural-language extraction instruction     |
+| `output_schema`       | `TaskSchema` |        ✅ |       — | Expected output fields and types            |
+| `search_query`        | `str`        |        ❌ |  `None` | Query to submit through the page search box |
+| `action_instruction`  | `str`        |        ❌ |  `None` | Browser action instructions                 |
+| `required_fields`     | `List[str]`  |        ❌ |  `None` | Fields required for validation              |
+| `max_pages`           | `int`        |        ❌ |     `1` | Number of pages to collect                  |
+| `max_repairs`         | `int`        |        ❌ |     `2` | Maximum repair attempts                     |
+| `total_timeout_sec`   | `int`        |        ❌ |   `300` | Overall task timeout                        |
 
 ---
 
-## Example Scripts
+# 🧪 Examples
 
-### Sync Examples
+## GitHub Scraping
 
 ```bash
 python3 example_github_scrap.py
+```
+
+Demonstrates browser navigation and hover interactions.
+
+## Amazon Scraping
+
+```bash
 python3 example_amazon_scrap.py
 ```
 
-- `example_github_scrap.py` demonstrates hover navigation on GitHub.
-- `example_amazon_scrap.py` demonstrates search, extraction, pagination, and validation.
+Demonstrates:
 
-### Async Examples
+* Search
+* Dynamic extraction
+* Pagination
+* Validation
+
+## Async Examples
 
 ```bash
 python3 example_github_scrap_async.py
 python3 example_amazon_scrap_async.py
 ```
 
-- `example_github_scrap_async.py` is the async version of the GitHub workflow.
-- `example_amazon_scrap_async.py` is the async version of the Amazon workflow.
-
 ---
 
-## Model Providers
+# 🤖 LLM Providers
 
-The agents use the OpenAI SDK interface, so any OpenAI-compatible provider can work if it supports chat completions. For general details on how to configure the client with a custom `base_url` or alternative environment variables, refer to the [OpenAI Python Official Documentation](https://developers.openai.com/api/docs/libraries?language=python) or [OpenAI Python SDK Usage - Github Documentation](https://github.com/openai/openai-python#usage).
+DynamicScrap uses the **OpenAI SDK interface**, which makes it possible to work with OpenAI-compatible providers.
 
-### Examples:
-
-### 1. OpenAI (ChatGPT)
-
-> ⚠️ **Important**
->
-> Do **not** pass the `base_url` parameter when using OpenAI directly.
->
-> The OpenAI SDK automatically uses the official OpenAI API endpoint. Passing a custom `base_url` value (including `""` or `None`) may result in connection or initialization errors.
-
-**✅ Correct**
+## OpenAI
 
 ```python
 from openai import OpenAI
 
-client = OpenAI(api_key="your-api-key")
-```
-
-**❌ Incorrect**
-
-```python
 client = OpenAI(
-    api_key="your-api-key",
-    base_url=""
+    api_key="your-api-key"
 )
 ```
 
-```python
-client = OpenAI(
-    api_key="your-api-key",
-    base_url=None
-)
-```
+> When using OpenAI directly, the custom `base_url` parameter is not required.
 
 ---
 
-### 2. Together
+## Together AI
 
-Refer to the [Together AI OpenAI Compatibility Guide](https://docs.together.ai/docs/openai-api-compatibility) for more details.
-
-```bash
+```env
 BASE_URL="https://api.together.xyz/v1"
-API_KEY="your-together-api-key"
-MODEL="meta-llama/Llama-3-70b-chat-hf"
+API_KEY="your-api-key"
+MODEL="your-model"
 ```
 
 ---
 
-### 3. OpenRouter
+## OpenRouter
 
-Refer to the [OpenRouter OpenAI Integration Guide](https://openrouter.ai/docs/guides/community/openai-sdk) for more details.
-
-```bash
+```env
 BASE_URL="https://openrouter.ai/api/v1"
-API_KEY="your-openrouter-key"
-MODEL="anthropic/claude-3.5-sonnet"
+API_KEY="your-api-key"
+MODEL="your-model"
 ```
 
 ---
 
-### 4. Ollama (Locally)
+## Ollama
 
-Refer to the [Ollama OpenAI Compatibility Guide](https://docs.ollama.com/api/openai-compatibility) for more details.
+DynamicScrap can also work with a locally hosted Ollama model.
 
-```bash
+```env
 BASE_URL="http://localhost:11434/v1"
 API_KEY="ollama"
 MODEL="qwen2.5:7b"
 ```
 
----
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome. Feel free to open a pull request or file an issue if you'd like to improve the agent, add new examples, or support additional model providers.
+This makes it possible to experiment with **local LLM-powered scraping workflows** without sending model requests to a cloud provider.
 
 ---
 
-## Disclaimer
+# 🆚 Traditional Scraping vs DynamicScrap
 
-This tool automates browser interactions and data extraction. Users are responsible for ensuring their use complies with the target website's terms of service, `robots.txt`, and applicable laws (including data privacy and copyright regulations). Use responsibly.
+### Traditional Scraper
+
+```text
+Website
+   ↓
+CSS / XPath Selector
+   ↓
+HTML Element
+   ↓
+Extract Data
+```
+
+If the website structure changes:
+
+```text
+❌ Selector may break
+❌ Scraper may require code changes
+```
+
+### DynamicScrap
+
+```text
+Natural Language Instruction
+            ↓
+         LLM Agent
+            ↓
+    Understand Website
+            ↓
+    Navigate Dynamically
+            ↓
+      Extract Data
+            ↓
+        Validate
+            ↓
+     Structured Output
+```
+
+The objective is to move from:
+
+**Selector-driven scraping**
+
+to:
+
+**Instruction-driven scraping**
 
 ---
 
-## Acknowledgments
+# 🖱️ Browser Actions
 
-Special thanks to the [OpenAI SDK](https://github.com/openai/openai-python) team for their excellent library, which powers our LLM communication interface.
+The agent can dynamically work with browser actions including:
+
+* Click
+* Type
+* Hover
+* Scroll
+* Wait
+* Search
+* Pagination
+* Tab handling
+* Navigation
+* Data extraction
+
+---
+
+# 🗺️ Roadmap
+
+* [ ] More browser actions
+* [ ] Improved extraction strategies
+* [ ] More robust repair workflows
+* [ ] Concurrent website scraping
+* [ ] Persistent browser sessions
+* [ ] More local LLM integrations
+* [ ] Web UI for task creation
+* [ ] CSV / Excel / database export
+* [ ] Better observability and debugging
+* [ ] Multi-agent scraping workflows
+
+---
+
+# 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+To contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test your changes
+5. Open a Pull Request
+
+---
+
+# ⚠️ Responsible Use
+
+DynamicScrap automates browser interaction and web data extraction.
+
+Users are responsible for ensuring that their scraping activities comply with:
+
+* Website Terms of Service
+* `robots.txt`
+* Applicable laws
+* Data privacy requirements
+* Copyright requirements
+
+Please use the project responsibly.
+
+---
+
+# ⭐ Support the Project
+
+If you find **DynamicScrap** useful:
+
+⭐ **Star** the repository
+🍴 **Fork** the project
+🐛 **Report** issues
+💡 **Suggest** improvements
+🤝 **Contribute** to the project
+
+---
+
+## 📄 License
+
+See the repository for license information.
