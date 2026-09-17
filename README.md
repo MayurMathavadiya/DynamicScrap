@@ -1,4 +1,4 @@
-# Dynamic Scrap Agent 
+# Dynamic Scrap Agent
 
 `DynamicScrap` is an autonomous, LLM-driven web scraping agent built with Python, Playwright, BeautifulSoup, Pydantic, and the OpenAI SDK. It translates natural language instructions into browser actions, then extracts data into a user-defined schema without requiring hardcoded CSS or XPath selectors.
 
@@ -33,6 +33,8 @@ The repo currently provides two implementations:
 ## Installation
 
 ```bash
+git clone https://github.com/your-username/DynamicScrap.git
+cd DynamicScrap
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -200,7 +202,6 @@ The agents use the OpenAI SDK interface, so any OpenAI-compatible provider can w
 
 ### Examples:
 
-
 ### 1. OpenAI (ChatGPT)
 
 > ⚠️ **Important**
@@ -268,6 +269,18 @@ BASE_URL="http://localhost:11434/v1"
 API_KEY="ollama"
 MODEL="qwen2.5:7b"
 ```
+
+---
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome. Feel free to open a pull request or file an issue if you'd like to improve the agent, add new examples, or support additional model providers.
+
+---
+
+## Disclaimer
+
+This tool automates browser interactions and data extraction. Users are responsible for ensuring their use complies with the target website's terms of service, `robots.txt`, and applicable laws (including data privacy and copyright regulations). Use responsibly.
 
 ---
 
