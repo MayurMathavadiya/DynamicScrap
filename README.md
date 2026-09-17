@@ -563,4 +563,4 @@ If you find DynamicScrap useful:
 
 ## 📄 License
 
-See the repository for license information.
+Free for all. Enjoy forks 😁
