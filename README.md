@@ -1,24 +1,19 @@
+<div align="center">
+
 # 🤖 DynamicScrap
 
-<p align="center">
-  <strong>Autonomous LLM-Powered Web Scraping Agent</strong>
+### Autonomous LLM-Powered Web Scraping Agent
+
+Turn natural-language instructions into browser actions and structured web data.
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/Playwright-Browser%20Automation-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright Browser Automation">
+  <img src="https://img.shields.io/badge/LLM-Powered-8A2BE2?style=for-the-badge" alt="LLM Powered">
+  <img src="https://img.shields.io/badge/License-Open%20Source-blue?style=for-the-badge" alt="Open Source">
 </p>
 
-<p align="center">
-  Turn natural-language instructions into browser actions and structured web data.
-</p>
-
-<p align="center">
-
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-
-![Playwright](https://img.shields.io/badge/Playwright-Browser%20Automation-2EAD33?style=for-the-badge\&logo=playwright\&logoColor=white)
-
-![LLM](https://img.shields.io/badge/LLM-Powered-8A2BE2?style=for-the-badge)
-
-![License](https://img.shields.io/badge/License-Open%20Source-blue?style=for-the-badge)
-
-</p>
+</div>
 
 ---
 
@@ -508,16 +503,7 @@ The project combines **browser automation, LLM reasoning, structured extraction,
 
 # 🗺️ Roadmap
 
-* [ ] More browser actions
-* [ ] Improved extraction strategies
-* [ ] More robust repair workflows
-* [ ] Concurrent scraping
-* [ ] Persistent browser sessions
-* [ ] More local LLM integrations
-* [ ] Web UI for creating scraping tasks
-* [ ] CSV / Excel / database export
-* [ ] Better observability
-* [ ] Multi-agent scraping workflows
+* [ ] Not decided yet 😂. Please raise issue if you have new idea 💡.
 
 ---
 
